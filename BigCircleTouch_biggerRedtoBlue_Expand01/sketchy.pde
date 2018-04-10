@@ -14,7 +14,8 @@ class Circles {
   float hueY; 
   float ballX;
   float ballY;
-  float hueAt;
+  float hueAt = 0 ;
+  float hueTo = 60; 
   float switcherX;
   float switcherY;
   float coinFlipX;
@@ -25,7 +26,6 @@ class Circles {
   this.y = y; 
   this.d = d;
   coinFlipX = 1;
-  coinFlipY = 1;
   this.switcherX = random (0,2);
   this.switcherY = random (0,2);
   if (this.switcherX <= 1){
@@ -48,8 +48,20 @@ class Circles {
   
   void changeRGB() {
     //fill(random(0,100),100,100,75);
-    this.hueAt = random(0,100);
+    //this.hueAt = random(0,100);
+    this.hueAt = hueTo;
     fill(this.hueAt,100,100,50);
+  }
+  
+  boolean colorRef(Circles other) {
+  if (this.hueAt==other.hueAt) {
+    return true;
+    }
+  else {return false;}
+  }
+  
+  void theyAllBlue () {
+    hueTo = random(0,100);
   }
   
   void normRGB(float changeLook) {

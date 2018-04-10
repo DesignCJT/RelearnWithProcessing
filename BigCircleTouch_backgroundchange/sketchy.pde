@@ -23,7 +23,13 @@ class Circles {
   this.yspeed = random (.5,1.2);
   } 
   
+  //Chose to work with a boolean here rather than a function that alters an int or float
+  //this was mainly to learn about how else to activate a change, but also the boolean is 
+  //a neat way of asking a logic question "Are they touching? True if yes." 
+  
   boolean touching (Circles other) {
+    
+    //Using the built in distance function I compare radii to assess in overlapping or not
     float dtest = dist(this.x,this.y,other.x, other.y);
     if (dtest < (    (this.d/2) + (other.d/2)   )   ) {
        return true;}
@@ -31,8 +37,8 @@ class Circles {
      return false;}
   }
   
+  //ChangeRGB is ran when tester is true
   void changeRGB() {
-    //fill(random(0,100),100,100,75);
     fill(20,40,35,50);
   }
   
@@ -47,30 +53,27 @@ class Circles {
   }
   
   void move() {
-    //this.x = this.x + random(-2,2);
-    //this.y = this.y + random(-2,2);
-    
     this.x= this.x + this.xspeed;
     this.y= this.y + this.yspeed;
   }
   
+  
+  //This is for the circle's movement and bouncing at edges
   void checkEdges () {
-  //if (x < (d/2) || x >        ) {
-  if (x + (d/2) > width || x-(d/2) < 0) {
-    xspeed = xspeed * -1;
+    
+    if (x + (d/2) > width || x-(d/2) < 0) {
+      xspeed = xspeed * -1;
+    }
+    if (y + (d/2) > height || y-(d/2) < 0) {
+      yspeed = yspeed * -1;
+    }
   }
-  if (y + (d/2) > height || y-(d/2) < 0) {
-    yspeed = yspeed * -1;
+  
+  //Based on the first ball in the array's position
+  void colorBack () {
+    hueX = x * 100 / width ;
+    hueY = y * 100 / height; 
+    background (((hueX/2) + (hueY/2)), 100, 75);
   }
-}
-void colorBack () {
-  hueX = x * 100 / width ;
-  hueY = y * 100 / height; 
-  background (((hueX/2) + (hueY/2)), 100, 75);
-}
-void colorBall () {
-  ballX = x * 100 / width ;
-  ballY = y * 100 / height; 
-  fill ((100-((ballX/2) + (ballY/2))), 100, 100);; 
-}
+  
 }
